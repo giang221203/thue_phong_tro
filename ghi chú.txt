@@ -1,0 +1,39 @@
+Bảng Rroperty :Bài đăng dự án,đại khái là một người đăng cho thuê căn hộ
+-column agentId là kiểu ràng buộc 1 nhiều với User, một bài đăng chỉ có một User 
+-column listingType là cho thuê hay bán kiểu enum : chọn 1 trong 2 
+-colunm status là đang rao bán hay đã được bán đi rồi
+-column images kiểu text là nhiều ảnh 
+-column bedroom , bathroom kiểu bigint là số phòng ngủ , phòng tắm
+-column yearBuilt kiểu dữ liệu int là năm xây dựng
+-column size là nhà khoảng bao nhiêu met vuông 
+-column featuredImage là một ảnh đại diện
+-Ràng buộc 1 nhiều với Property_Feature : Là một bài đăng dự án có nhiều tính năng
+
+Bảng Property Type : Là loại cho bài đăng dự án ,đại khái là một căn hộ hay một căn nhà
+
+Bảng Feature 
+-Ràng buộc 1 nhiều với Property_Feature : Là một tính năng có nhiều bài đăng dự án
+
+Bảng Property_Feature: Là bảng trung gian giữa Property và bảng Feature thể hiện mối quan hệ nhiều nhiều giữa 2 bảng đó
+-column propertyId : id bảng Property ràng buộc với quan hệ 1 nhiều 
+-column featureId: id bảng Feature ràng buộc với quan hệ 1 nhiều 
+
+Bảng Comment 
+-column propertyId :id của bảng Property ràng buộc 1 nhiều với trường này là một bài đăng có nhiều người comment
+-column userId :id của bảng User ràng buộc 1 nhiều với trường này là một người có thể comment được nhiều lần
+-column parent :lưu lại id của comment và được comment lại comment của người khác
+
+Bảng Submission là người cần bấm vào bài đăng để trao đổi muốn thuê 
+-column propertyId :id của bảng Property ràng buộc 1 nhiều với trường này là một bài đăng có nhiều người submit thuê
+-column userId :id của bảng User ràng buộc 1 nhiều với trường này là một người có thể submit thuê được nhiều lần
+-column parent :lưu lại id của comment và được comment lại comment của người khác
+
+
+
+
+
+
+
+
+
+
