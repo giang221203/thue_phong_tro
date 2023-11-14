@@ -1,3 +1,6 @@
+Bảng Role phân quyền admin và user 
+
+
 Bảng Rroperty :Bài đăng dự án,đại khái là một người đăng cho thuê căn hộ
 -column agentId là kiểu ràng buộc 1 nhiều với User, một bài đăng chỉ có một User 
 -column listingType là cho thuê hay bán kiểu enum : chọn 1 trong 2 
@@ -28,8 +31,11 @@ Bảng Submission là người cần bấm vào bài đăng để trao đổi mu
 -column userId :id của bảng User ràng buộc 1 nhiều với trường này là một người có thể submit thuê được nhiều lần
 -column parent :lưu lại id của comment và được comment lại comment của người khác
 
-
-
+Bảng User Media 
+-column userId : column id của User qhe 1 nhiều với userId thể hiện 1 user có nhiều mạng xã hội 
+-column provider là các tên mạng xã hội như fb zalo youtube ...
+-column path là link các trang mạng của user
+-column icon 
 
 
 
