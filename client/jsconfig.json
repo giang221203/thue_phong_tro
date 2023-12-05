@@ -1,8 +1,10 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {    // config gợi ý code cho đường dẫn tuyệt đối
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"],
+            "~/*": ["src/*"],
         }
     }
+
+ 
 }

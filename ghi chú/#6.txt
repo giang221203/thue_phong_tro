@@ -1,0 +1,2 @@
+"clsx": "^2.0.0",  // dùng để css với logic dạng true of farse 
+   "tailwind-merge": "^2.1.0",    //thêm được nhiều thuộc tính trùng nhau trong css như flex với grid thì sẽ lấy thuộc tính cuối
