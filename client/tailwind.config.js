@@ -6,6 +6,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        agbalumo:["Agbalumo"],
+        hedvig:["Hedvig"],
+        
+      },
       backgroundColor:{
         "main-50":"#EDEFF6",
         "main-100":"#DBDFEC",
@@ -17,6 +22,9 @@ export default {
         "main-700":"#2C3A61",
         "main-800":"#1E2640",
         "main-900":"#0F1320",
+        "overlay-70":"rgba(0,0,0,0.7)",
+        "overlay-30":"rgba(0,0,0,0.3)",
+        "overlay-50":"rgba(0,0,0,0.5)",
       },
       colors:{
         "main-50":"#EDEFF6",

@@ -5,8 +5,13 @@ import { navigations } from "~/utils/constants";
 import clsx from "clsx";
 import withRouter from "~/hooks/withRouter";
 import { twMerge } from "tailwind-merge";
+import { useUserStore } from "~/store/useUserStore";
+import { useAppStore } from "~/store/useAppStore";
+import { Login } from "..";
 
-const Navigation = ({ location }) => {
+const Navigation = ({ location, navigate }) => {
+  const { token } = useUserStore();
+  const { setModal } = useAppStore();
   return (
     <div
       className={twMerge(
@@ -39,16 +44,31 @@ const Navigation = ({ location }) => {
             {item.text}
           </NavLink>
         ))}
-        <Button
-          className={twMerge(
-            clsx(
-              location.pathname === "/" &&
-                "bg-transparent border-main-100 border"
-            )
-          )}
-        >
-          Add listing
-        </Button>
+        {!token ? (
+          <Button
+            className={twMerge(
+              clsx(
+                location.pathname === "/" &&
+                  "bg-transparent border-main-100 border"
+              )
+            )}
+            handleOnclick={()=>setModal(true ,<Login/>)} 
+              // khi click sẽ truyền tham số hàm trong store để set lại giá trị khởi tạo ở store 
+          >
+            Sign in
+          </Button>
+        ) : (
+          <Button
+            className={twMerge(
+              clsx(
+                location.pathname === "/" &&
+                  "bg-transparent border-main-100 border"
+              )
+            )}
+          >
+            Add listing
+          </Button>
+        )}
       </div>
     </div>
   );
