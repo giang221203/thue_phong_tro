@@ -9,7 +9,7 @@ const Button = ({ children, className, handleOnclick, type = "button"}) => {
       type={type}
       onClick={handleOnclick}
       className={twMerge(
-        clsx("py-3 px-4 text-white bg-main-700 rounded-md", className)
+        clsx("py-3 px-4  text-white bg-main-700 rounded-md", className)
       )}
     >
       {children}
