@@ -1,0 +1,10 @@
+### Register
+
+POST http://localhost:5000/api/auth/
+Content-Type: application/json
+
+{
+    "name":"giang1",
+    "password":"123",
+    "phone":"0379245167"
+}
