@@ -1,0 +1,9 @@
+chức năng đăng ký
+sửa bảng role thành kiểu enum 
+mã hóa password
+
+http code incorrect password : kiểm tra số trang thái lỗi 404, 200... 
+
+chức năng đăng nhâp
+
+accesstoken  tài liệu :jwt.io

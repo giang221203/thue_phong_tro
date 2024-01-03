@@ -1,2 +1,6 @@
 Lệnh tạo bảng model
 npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+
+
+"npx sequelize-cli db:migrate", cập nhật lại migrate
+"npx sequelize-cli db:migrate:undo" quay về trạng thái trước đó của migrate

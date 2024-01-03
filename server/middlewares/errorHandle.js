@@ -1,14 +1,16 @@
 const errHandler = (error, req, res, next) => {
   // hàm config lại lỗi validate
+  const formatedMessage = error.message?.replaceAll(`\"`, "") // thay thế dấu / , dấu " thành chuỗi rỗng 
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   return res.status(statusCode).json({
     success: false,
-    mes: error.message,
+    mes: formatedMessage,
   })
 };
 
 const throwErrorWithStatus = (code, message, res, next) => {
-  const error = new Error(message);
+  const formatedMessage = message?.replaceAll(`\"`, "") // thay thế dấu / , dấu " thành chuỗi rỗng 
+  const error = new Error(formatedMessage);
   res.status(code);
   next(error);
 };
