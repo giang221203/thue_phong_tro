@@ -1,0 +1,8 @@
+tạo component radio 
+tạo file axios
+
+chức năng đăng ký,đăng nhập client
+validate số điện thoại
+thêm thông báo swar ,thêm toastify 
+
+tài liêụ validate regex

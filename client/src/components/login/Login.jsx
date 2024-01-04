@@ -1,24 +1,56 @@
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import { InputForm } from "..";
+import { InputForm, InputRadio } from "..";
 import { useForm } from "react-hook-form";
 import Button from "../commons/Button";
+import { apiRegister, apiSignIn } from "~/apis/auth";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import withRouter from "~/hooks/withRouter";
+import { useAppStore } from "~/store/useAppStore";
 
-const Login = () => {
+const Login = ({navigate}) => {
   const [variant, setVariant] = useState("LOGIN"); // khởi tạo state để mặc định là login
+  const { setModal } = useAppStore();
   const {
     register,
     formState: { errors },
     handleSubmit,
-    reset
+    reset,
   } = useForm();
-  useEffect(()=>{       // khi chuyển trạng thái từ login sang register thì reset lại input 
-    reset()
-  },[variant])
-  console.log(errors);
-  const onSubmit = (data)=>{
+  useEffect(() => {
+    // khi chuyển trạng thái từ login sang register thì reset lại input
+    reset();
+  }, [variant]);
+  // console.log(errors);
+  const onSubmit = async (data) => {
+   
+    if(variant === "REGISTER"){
+      const response = await apiRegister(data);
+      if(response.success){
+        Swal.fire({
+          icon:'success',
+          title:"Congrats!",
+          text:response.mes,
+          showConfirmButton:true,
+          confirmButtonText:"Go sign in"
+        }).then(({isConfirmed})=>{
+          if(isConfirmed)  setVariant('LOGIN')
+         })
+      }else toast.error(response.mes)
+    }
+    if(variant ==="LOGIN"){
+      const {name ,role,...payload} = data  // dùng detruturing lọai bỏ name và role để lấy phone với password
+      const response = await apiSignIn(payload);
+      if(response.success){
+        toast.success(response.mes)
+        setModal(false,null)
+      
+      }else toast.error(response.mes)
+      
+    }
     console.log(data);
-  }
+  };
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -48,14 +80,21 @@ const Login = () => {
         </span>
         {/* khi click thì set lại giá trị về register và xét điều kiện chuyển đổi style  */}
       </div>
-      <form className="flex w-full flex-col gap-4">
+      <form className="flex w-full flex-col gap-4 px-4">
         <InputForm
           register={register}
           label="Phone Number"
           placeholder="Type your phone number"
           inputClassName="rounded-md"
           id="phone"
-          validate={{required:'This field cannot empty'}}
+          validate={{
+            required: "This field cannot empty",
+           
+            pattern: {     // validate cho sdt
+              value: /(0[3|5|7|8|9])+([0-9]{8})\b/,
+              message: "Phone number invalid.",
+            },
+          }}
           error={errors}
         />
         <InputForm
@@ -65,23 +104,43 @@ const Login = () => {
           inputClassName="rounded-md"
           id="password"
           type="password"
-          error={errors}         // truyền errors của react-hook-form 
-          validate={{required:'This field cannot empty'}}
+          error={errors} // truyền errors của react-hook-form
+          validate={{ required: "This field cannot empty" }}
         />
-        {variant === "REGISTER" &&  <InputForm
-          register={register}
-          label="Fullname"
-          placeholder="Type your name"
-          inputClassName="rounded-md"
-          id="name"
-          error={errors}
-          validate={{required:'This field cannot empty'}}
-        />}
-        <Button handleOnclick={handleSubmit(onSubmit)} className="py-2 my-6">{variant === "LOGIN" ? 'Sign in':'Register '}</Button>
-        <span className="cursor-pointer text-main-500 hover:underline w-full text-center">Forgot your password?</span>
+        {variant === "REGISTER" && (
+          <InputForm
+            register={register}
+            label="Fullname"
+            placeholder="Type your name"
+            inputClassName="rounded-md"
+            id="name"
+            error={errors}
+            validate={{ required: "This field cannot empty" }}
+          />
+        )}
+        {variant === "REGISTER" && (
+          <InputRadio
+            register={register}
+            label="Type account"
+            id="role"
+            error={errors}
+            validate={{ required: "This field cannot empty" }}
+            options={[
+              { label: "User", value: "USER" },
+              { label: "Agent", value: "AGENT" },
+            ]}
+          />
+        )}
+
+        <Button handleOnclick={handleSubmit(onSubmit)} className="py-2 my-6">
+          {variant === "LOGIN" ? "Sign in" : "Register "}
+        </Button>
+        <span className="cursor-pointer text-main-500 hover:underline w-full text-center">
+          Forgot your password?
+        </span>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default withRouter(Login);

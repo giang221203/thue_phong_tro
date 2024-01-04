@@ -2,7 +2,7 @@ chức năng đăng ký
 sửa bảng role thành kiểu enum 
 mã hóa password
 
-http code incorrect password : kiểm tra số trang thái lỗi 404, 200... 
+tài liệu kiểm tra số trang thái lỗi 404, 200...   :http code incorrect password
 
 chức năng đăng nhâp
 
