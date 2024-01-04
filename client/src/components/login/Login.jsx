@@ -6,12 +6,12 @@ import Button from "../commons/Button";
 import { apiRegister, apiSignIn } from "~/apis/auth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import withRouter from "~/hooks/withRouter";
 import { useAppStore } from "~/store/useAppStore";
 
-const Login = ({navigate}) => {
+const Login = () => {
   const [variant, setVariant] = useState("LOGIN"); // khởi tạo state để mặc định là login
   const { setModal } = useAppStore();
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     formState: { errors },
@@ -23,10 +23,12 @@ const Login = ({navigate}) => {
     reset();
   }, [variant]);
   // console.log(errors);
+
   const onSubmit = async (data) => {
-   
     if(variant === "REGISTER"){
+      setIsLoading(true)
       const response = await apiRegister(data);
+      setIsLoading(true)
       if(response.success){
         Swal.fire({
           icon:'success',
@@ -143,4 +145,4 @@ const Login = ({navigate}) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;
