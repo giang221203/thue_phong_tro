@@ -1,0 +1,3 @@
+inset data roles
+phân quyền
+khi đã có data trong bảng ,thêm 1 column vào thuộc tính property là ower với migrations là update-owner-property :ower là mảnh đất hoặc căn nhà này là của ai

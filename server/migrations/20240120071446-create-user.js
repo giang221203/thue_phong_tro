@@ -36,7 +36,8 @@ module.exports = {
         references:{       // ràng buộc với bảng Roles
           model :'Roles',
           key:'code'
-        }
+        },
+        defaultValue:"ROL7",
       },
       avatar: {
         type: Sequelize.STRING

@@ -47,7 +47,7 @@ const signIn = asyncHandler(async (req, res, next) => {
   if (!isMatchingPassword)
     return throwErrorWithStatus(401, "Password is wrong.", res, next); // nếu không khớp password thì bắn lỗi
   const token = jwt.sign(
-    { uid: user.id, role: user.role },
+    { uid: user.id, roleCode: user.roleCode },
     process.env.JWT_SECRET,
     { expiresIn: "7d" }
   );

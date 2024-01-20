@@ -1,6 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -19,16 +19,13 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       address: DataTypes.STRING,
       password: {
-        type:DataTypes.STRING,
-        set(value){
-          const salt = bcrypt.genSaltSync(10)  // mã hóa không cần bất đồng bộ 10 lần
-          this.setDataValue('password', bcrypt.hashSync(value,salt))
-        }
+        type: DataTypes.STRING,
+        set(value) {
+          const salt = bcrypt.genSaltSync(10); // mã hóa không cần bất đồng bộ 10 lần
+          this.setDataValue("password", bcrypt.hashSync(value, salt));
+        },
       },
-      role: {
-        type: DataTypes.ENUM,
-        values: ["ADMIN", "AGENT", "USER"],
-      },
+      roleCode: DataTypes.STRING,
       avatar: DataTypes.STRING,
     },
     {

@@ -1,17 +1,17 @@
 const router = require("express").Router();
 const Joi = require("joi");
 const ctrls = require("../controllers/auth");
-const { stringReq, numberREq } = require("../middlewares/joiSchema");
+const { stringReq, numberREq,string } = require("../middlewares/joiSchema");
 const validateDto = require("../middlewares/validation");
 
 router.post(
-  "/register",
+  "/signup",
   validateDto(
     Joi.object({
       password: stringReq,
       name: stringReq,
       phone: numberREq,
-      role: stringReq,
+      roleCode: string, 
     })
   ),
   ctrls.register
