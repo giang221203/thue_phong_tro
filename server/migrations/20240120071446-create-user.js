@@ -11,25 +11,32 @@ module.exports = {
 
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       phone: {
         type: Sequelize.STRING,
-        unique:true
+        unique:true,
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        unique:true
+        unique:true,
+       
       },
       address: {
         type: Sequelize.STRING
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      role: {
-        type: Sequelize.ENUM(["ADMIN","AGENT","USER"]),
-        defaultValue:"USER",
+      roleCode: {
+        type: Sequelize.STRING,
+        references:{       // ràng buộc với bảng Roles
+          model :'Roles',
+          key:'code'
+        }
       },
       avatar: {
         type: Sequelize.STRING

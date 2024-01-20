@@ -19,9 +19,10 @@ import { useUserStore } from "./store/useUserStore";
 function App() {
   const { isShowModal } = useAppStore(); // lấy dữ liệu trong store của zuntand
   const {getCurrent,current,token} = useUserStore()
-  useEffect(()=>{
+  useEffect(()=>{    // khi token thay đổi thì gọi tiếp
     getCurrent()
   },[token])
+
 console.log(current);
   return (
     <div className="relative">

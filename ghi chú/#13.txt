@@ -1,0 +1,6 @@
+set token vào zutand
+viết api getCurrent
+viết middleware verify token
+viết hàm bất đồng bộ getCurrent và gọi apiGetcurrent trong zutand,nếu gọi thành công set lại current
+gọi hàm  getCurrent ở home
+config token ở axios,chuyển json token thành object token , lưu token vào headers
