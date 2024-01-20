@@ -35,6 +35,7 @@ const signIn = asyncHandler(async (req, res, next) => {
   const user = await db.User.findOne({
     where: { phone: phone }, // findOne :tìm dữ liệu gửi lên có sdt bằng sdt trong db
   });
+  console.log(user);
   if (!user)
     return throwErrorWithStatus(
       401,

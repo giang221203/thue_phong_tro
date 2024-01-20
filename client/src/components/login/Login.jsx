@@ -7,10 +7,12 @@ import { apiRegister, apiSignIn } from "~/apis/auth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useAppStore } from "~/store/useAppStore";
+import { useUserStore } from "~/store/useUserStore";
 
 const Login = () => {
   const [variant, setVariant] = useState("LOGIN"); // khởi tạo state để mặc định là login
   const { setModal } = useAppStore();
+  const {token,setToken } = useUserStore()
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -45,7 +47,9 @@ const Login = () => {
       const {name ,role,...payload} = data  // dùng detruturing lọai bỏ name và role để lấy phone với password
       const response = await apiSignIn(payload);
       if(response.success){
+        setToken(response.accessToken)
         toast.success(response.mes)
+
         setModal(false,null)
       
       }else toast.error(response.mes)

@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { apiGetCurrent } from "~/apis/user";
 // export const useUserStore = create(() => ({
 //   // khởi tạo store trong zustand
 //   token: null,
@@ -12,7 +13,12 @@ export const useUserStore = create(
       // thêm persist để lưu vào storage
       token: null,
       current: null,
-      hiih: "gdg",
+      setToken: (token)=>set(()=>({token})),      // nhận vào 1 đối số là token và xét lại giá trị đối số đó
+      getCurrent:async ()=>{
+        const response = await apiGetCurrent()
+        if(response.success) return set(()=>({current :response.currentUser}))
+      },
+    
     }),
     {
       name: "rest06",

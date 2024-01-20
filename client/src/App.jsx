@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import path from "./utils/path";
 
@@ -14,10 +14,15 @@ import { Modal } from "./components";
 import { useAppStore } from "./store/useAppStore";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useUserStore } from "./store/useUserStore";
 
 function App() {
   const { isShowModal } = useAppStore(); // lấy dữ liệu trong store của zuntand
-
+  const {getCurrent,current,token} = useUserStore()
+  useEffect(()=>{
+    getCurrent()
+  },[token])
+console.log(current);
   return (
     <div className="relative">
       {isShowModal && <Modal />} {/* isShowModal bằng true thì sẽ hiện modal */}
