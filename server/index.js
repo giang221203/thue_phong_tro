@@ -5,6 +5,7 @@ const dbconn = require('./config/dbconn')
 const initRoutes = require('./routes')
 const { errHandler } = require('./middlewares/errorHandle')
 const app = express()
+require("./config/redis.config")
 app.use(cors({
     origin:process.env.CLIENT_URL      // Chỉ localhost client mới được phép vào lấy tài nguyên, kết nối
 }))

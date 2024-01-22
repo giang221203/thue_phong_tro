@@ -10,6 +10,17 @@ Content-Type: application/json
     "role": "AGENT"
 }
 
+###
+POST http://localhost:5000/api/propertyType
+Content-Type: application/json
+
+
+{
+    "name":"Houees",
+    "image":"dfgdgdg",
+    "description":"0379245168",
+}
+
 
 ### SignIn
 POST http://localhost:5000/api/auth/signin

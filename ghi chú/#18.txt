@@ -1,0 +1,5 @@
+config redis
+tài liệu config : https://app.redislabs.com/#/subscriptions/subscription/2239338/bdb
+                  https://redis.io/docs/connect/clients/nodejs/
+
+viết middleware tránh spam gọi api

@@ -5,6 +5,9 @@ const ctrls = require("../controllers/propertyType");
 const validateDto = require("../middlewares/validation");
 const { verifyToken, isAdmin } = require("../middlewares/verifyToken");
 const { stringReq, string } = require("../middlewares/joiSchema");
+const rateLimiter = require("../middlewares/rateLimiter");
+
+router.use(rateLimiter)  // middleware chống spam
 
 router.post(
   "/",

@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler"); // dùng để bắt lỗ
 const db = require("../models");
 const { throwErrorWithStatus } = require("../middlewares/errorHandle");
 const { Op, Sequelize } = require("sequelize");
+const redis = require("../config/redis.config")
 
 // Thêm mới
 const createNewPropertyType = asyncHandler(async (req, res) => {
@@ -37,7 +38,7 @@ const getPropertyTypes = asyncHandler(async (req, res) => {
       };
     else options.attributes = attributes;
   } // attributes là cú pháp lấy các trường mình muốn
-  console.log(options);
+//   console.log(options);
   //  fields là chuỗi "apple,orange,banana", thì sau khi thực hiện dòng lệnh này, options.attributes sẽ là một mảng {attributes:["apple", "orange", "banana"]}.
   
 //   Filter by client queries
@@ -48,18 +49,31 @@ if(name)  query.name  = Sequelize.where(Sequelize.fn('LOWER',Sequelize.col('name
 // cú pháp sắp xếp của sequelize[[createdAt ,ASC],[name,DESC]]
 //  sort:createdAt,-name thì cú pháp ban đầu là [createdAt ,-name]
 if (sort){
-    console.log(sort);
+    // console.log(sort);
     // gửi lên sort:createdAt,-name thì cú pháp ban đầu là [createdAt ,-name]
     const order = sort.split(",").map((el)=>el.startsWith('-') ? [el.replace("-", ""), 'DESC'] : [el, 'ASC']) 
     //nêú trong phần tử bắt đầu bằng dấu - thì xóa dấu - và chuyển cú pháp từ [-createdAt ,name] thành [[createdAt,'DESC'],[name,ASC]]
-    console.log(order);
+    // console.log(order);
     options.order = order;
 }
 if (!limit) {
+    const areadyGetALl  = await redis.get('get-property-type')      // lấy dữ liệu trong redis
+
+    if(areadyGetALl) {
+        return res.json({
+            //   nếu không truyền status thì mặc định 200
+            success: true,
+            mes:"Got. redis",
+            propertyTypes: JSON.parse(areadyGetALl),
+          });
+    }
     const response = await db.PropertyType.findAll({
         where:query,  // nếu truyền param với key là name và value là House thì sẽ get phần tử có name là House
         ...options
     });
+    redis.set('get-property-type' ,JSON.stringify(response))
+
+    // dùng set để lưu dữ liệu db vào redis ,set truyền vào key và 'key' và value là dữ liệu phải chuyển về dạng json
     return res.json({
       //   nếu không truyền status thì mặc định 200
       success: response.length > 0,
