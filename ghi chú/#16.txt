@@ -1,0 +1,6 @@
+crud propertyType
+
+get theo field (trường) : -chọn trường muốn lấy nếu gửi qua param fields: name , id thì sẽ hiển thị mãng với các phần tử chỉ có trường name và id
+                          -chọn tường muốn loại bỏ nếu gửi qua param fields :-name thì sẽ hiển thị mãng với các phần tử mà chỉ loại bỏ trường name
+
+get theo query name : nếu gửi qua param name :house thì sẽ lâý các phần tử có tên là house

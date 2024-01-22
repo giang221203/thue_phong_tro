@@ -12,8 +12,7 @@ const register = asyncHandler(async (req, res) => {
 
   const { phone } = req.body;
   //Handle register
-  const response = await db.User.findOrCreate({
-    // User từ modelName: 'User' trong file model User
+  const response = await db.User.findOrCreate({  // User từ modelName: 'User' trong file model User
     where: { phone: phone }, // findOrCreate :tìm hoặc thêm mới , where:{phone :phone} :nếu không tìm thấy phone trong db thì defaults:req.body: thêm mới
     defaults: req.body,
   });
