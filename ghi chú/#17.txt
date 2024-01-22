@@ -1,0 +1,4 @@
+pagination
+sort
+update propretyType 
+remove propretyType
