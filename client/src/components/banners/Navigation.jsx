@@ -34,8 +34,7 @@ const Navigation = ({ location, navigate }) => {
           <NavLink
             className={({ isActive }) =>
               clsx(
-                isActive && "text-white font-medium",
-                location.pathname === "/" ? "text-white" : "text-gray-900"
+                location.pathname === "/" ? `text-white ${isActive && "text-white font-medium"}` : `text-gray-900 ${isActive && "text-gray-900 font-medium"}`
               )
             }
             key={item.id}

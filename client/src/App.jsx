@@ -15,6 +15,7 @@ import { useAppStore } from "./store/useAppStore";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useUserStore } from "./store/useUserStore";
+import { AdminLayout, CreatePropertyType, Dashboard, ManagePropertyType } from "./pages/admin";
 
 function App() {
   const { isShowModal } = useAppStore(); // lấy dữ liệu trong store của zuntand
@@ -28,12 +29,19 @@ console.log(current);
     <div className="relative">
       {isShowModal && <Modal />} {/* isShowModal bằng true thì sẽ hiện modal */}
       <Routes>
+        {/* public router */}
         <Route path={path.PUBLIC_LAYOUT} element={<PublicLayout />}>
           <Route path={path.HOME} element={<Home />} />
           <Route path={path.ABOUT_US} element={<AboutUs />} />
           <Route path={path.SEARCH} element={<Search />} />
           <Route path={path.PROPERTIES} element={<Properties />} />
           <Route path={path.OUR_AGENTS} element={<Ouragents />} />
+        </Route>
+        {/* admin router */}
+        <Route path={path.ADMIN_LAYOUT} element={<AdminLayout />}>
+          <Route path={path.DASHBOARD} element={<Dashboard />} />
+          <Route path={path.CREATE_PROPERTY_TYPE} element={<CreatePropertyType />} />
+          <Route path={path.MANAGE_PROPERTY_TYPE} element={<ManagePropertyType />} />
         </Route>
       </Routes>
       <ToastContainer

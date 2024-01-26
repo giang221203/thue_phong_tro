@@ -7,6 +7,11 @@
     PROPERTIES:'properties',
     SEARCH:'search',
 
+    //admin
+    ADMIN_LAYOUT: "admin",
+    DASHBOARD:'dashboard',
+    MANAGE_PROPERTY_TYPE:'manage-property-type',
+    CREATE_PROPERTY_TYPE:'create-property-type'
 }
 
 export default path
